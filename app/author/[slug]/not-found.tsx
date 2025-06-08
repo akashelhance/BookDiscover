@@ -1,0 +1,18 @@
+import Link from "next/link"
+
+export default function NotFound() {
+  return (
+    <main className="min-h-screen bg-white flex items-center justify-center px-4">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Author Not Found</h1>
+        <p className="text-gray-600 mb-8">The author profile you're looking for doesn't exist or has been moved.</p>
+        <Link
+          href="/authors"
+          className="inline-flex items-center px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+        >
+          Browse All Authors
+        </Link>
+      </div>
+    </main>
+  )
+}
