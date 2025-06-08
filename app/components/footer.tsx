@@ -2,8 +2,6 @@ import Link from "next/link"
 import { BookOpen, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
-
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -188,9 +186,7 @@ export default function Footer() {
                 Sitemap
               </Link>
             </div>
-            <p className="text-gray-400 text-sm text-center md:text-right">
-              © {currentYear} BookDiscover. All rights reserved.
-            </p>
+            <p className="text-gray-400 text-sm text-center md:text-right">© 2024 BookDiscover. All rights reserved.</p>
           </div>
         </div>
       </div>
