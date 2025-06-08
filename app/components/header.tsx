@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Search, BookOpen } from "lucide-react"
+import { Search, BookOpen, Menu, X } from "lucide-react"
 import ActiveLink from "./active-link"
 
 export default function Header() {
@@ -44,7 +44,7 @@ export default function Header() {
             </ActiveLink>
           </nav>
 
-          {/* Search Bar */}
+          {/* Search Bar and Mobile Menu */}
           <div className="flex items-center">
             <form className="relative hidden sm:block" role="search">
               <div className="relative">
@@ -58,72 +58,77 @@ export default function Header() {
               </div>
             </form>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden ml-4 p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              aria-label="Open mobile menu"
-            >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden ml-4 relative group">
+              <input type="checkbox" id="mobile-menu-toggle" className="peer hidden" />
+              <label
+                htmlFor="mobile-menu-toggle"
+                className="cursor-pointer p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 block"
+                aria-label="Toggle mobile menu"
+              >
+                <Menu className="h-6 w-6 peer-checked:hidden" />
+                <X className="h-6 w-6 hidden peer-checked:block" />
+              </label>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden border-t border-gray-200 py-4">
-          <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
-            <ActiveLink
-              href="/"
-              className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-            >
-              Home
-            </ActiveLink>
-            <ActiveLink
-              href="/books"
-              className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-            >
-              Books
-            </ActiveLink>
-            <ActiveLink
-              href="/categories"
-              className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-            >
-              Categories
-            </ActiveLink>
-            <ActiveLink
-              href="/authors"
-              className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-            >
-              Authors
-            </ActiveLink>
-            <ActiveLink
-              href="/people"
-              className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-            >
-              People
-            </ActiveLink>
-            <ActiveLink
-              href="/about"
-              className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-            >
-              About
-            </ActiveLink>
-          </nav>
+              {/* Mobile Dropdown Menu */}
+              <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-200 z-50">
+                <nav className="p-4" aria-label="Mobile navigation">
+                  <div className="flex flex-col space-y-2">
+                    <ActiveLink
+                      href="/"
+                      className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                    >
+                      Home
+                    </ActiveLink>
+                    <ActiveLink
+                      href="/books"
+                      className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                    >
+                      Books
+                    </ActiveLink>
+                    <ActiveLink
+                      href="/categories"
+                      className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                    >
+                      Categories
+                    </ActiveLink>
+                    <ActiveLink
+                      href="/authors"
+                      className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                    >
+                      Authors
+                    </ActiveLink>
+                    <ActiveLink
+                      href="/people"
+                      className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                    >
+                      People
+                    </ActiveLink>
+                    <ActiveLink
+                      href="/about"
+                      className="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                    >
+                      About
+                    </ActiveLink>
+                  </div>
 
-          {/* Mobile Search */}
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <form role="search">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <input
-                  type="search"
-                  placeholder="Search books, authors..."
-                  className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-gray-50 focus:bg-white transition-colors"
-                  aria-label="Search books and authors"
-                />
+                  {/* Mobile Search */}
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <form role="search">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <input
+                          type="search"
+                          placeholder="Search books, authors..."
+                          className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-gray-50 focus:bg-white transition-colors"
+                          aria-label="Search books and authors"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </nav>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
