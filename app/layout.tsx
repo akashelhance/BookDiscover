@@ -2,18 +2,16 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Header from "./components/header"
-import Footer from "./components/footer"
+import { siteConfig } from "../config/site"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "BookDiscover - Find Your Next Great Read",
-    template: "%s | BookDiscover",
+    default: siteConfig.seo.defaultTitle,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Discover amazing books and authors with personalized recommendations. Explore trending titles, bestsellers, and curated collections from influential people.",
+  description: siteConfig.seo.defaultDesc,
   keywords: [
     "books",
     "reading",
@@ -24,9 +22,9 @@ export const metadata: Metadata = {
     "book reviews",
     "reading lists",
   ],
-  authors: [{ name: "BookDiscover Team" }],
-  creator: "BookDiscover",
-  publisher: "BookDiscover",
+  authors: [{ name: `${siteConfig.name} Team` }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   robots: {
     index: true,
     follow: true,
@@ -41,27 +39,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://bookdiscover.com",
-    siteName: "BookDiscover",
-    title: "BookDiscover - Find Your Next Great Read",
-    description:
-      "Discover amazing books and authors with personalized recommendations. Explore trending titles, bestsellers, and curated collections.",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.seo.defaultTitle,
+    description: siteConfig.seo.defaultDesc,
     images: [
       {
         url: "/placeholder.svg?height=630&width=1200",
         width: 1200,
         height: 630,
-        alt: "BookDiscover - Book Recommendation Platform",
+        alt: `${siteConfig.name} - Book Recommendation Platform`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BookDiscover - Find Your Next Great Read",
-    description:
-      "Discover amazing books and authors with personalized recommendations. Explore trending titles, bestsellers, and curated collections.",
+    title: siteConfig.seo.defaultTitle,
+    description: siteConfig.seo.defaultDesc,
     images: ["/placeholder.svg?height=630&width=1200"],
-    creator: "@bookdiscover",
+    creator: `@${siteConfig.social.twitter.split('/').pop()}`,
   },
   verification: {
     google: "google-site-verification-code",
@@ -76,9 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${inter.className} min-h-full flex flex-col bg-white text-gray-900 antialiased`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   )

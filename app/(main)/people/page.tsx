@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Users, BookOpen, Filter } from "lucide-react"
+import { Users, BookOpen, Filter, ArrowRight, Sparkles } from "lucide-react"
 
 type Props = {
   searchParams: Promise<{ profession?: string }>
 }
 
 export const metadata: Metadata = {
-  title: "Influential People Who Recommend Books | BookDiscover 2",
+  title: "Influential People Who Recommend Books | BookDiscover",
   description:
     "Discover book recommendations from influential people across various professions. Find your next great read through curated lists from industry leaders, entrepreneurs, scientists, and more.",
   keywords: "book recommendations, influential people, celebrities, reading lists, book discovery, thought leaders",
@@ -203,8 +203,8 @@ const people = [
 ]
 
 export default async function PeoplePage({ searchParams }: Props) {
-  const { profession } = await searchParams
-  const selectedProfession = profession || ""
+  const params = await searchParams
+  const selectedProfession = params.profession || ""
 
   // Filter people based on selected profession
   const filteredPeople = selectedProfession
@@ -218,9 +218,9 @@ export default async function PeoplePage({ searchParams }: Props) {
   const peopleSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Influential People Who Recommend Books x",
+    name: `Influential ${selectedProfession ? currentProfession?.name : "People"} Who Recommend Books`,
     description: "Discover book recommendations from influential people across various professions.",
-    url: `/people${selectedProfession ? `?profession=${selectedProfession}` : ""}`,
+    url: `https://bookdiscover.com/people${selectedProfession ? `?profession=${selectedProfession}` : ""}`,
     mainEntity: {
       "@type": "ItemList",
       name: "Influential People Collection",
@@ -242,35 +242,55 @@ export default async function PeoplePage({ searchParams }: Props) {
 
   return (
     <>
-      {/* Structured Data */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(peopleSchema) }} />
 
-      <main className="min-h-screen bg-white">
-        {/* Header Section */}
-        <header className="bg-gradient-to-br from-slate-50 to-gray-100 py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Influential People Who Recommend Books
+      <main className="min-h-screen bg-gray-50/50">
+        
+        {/* ============================== */}
+        {/* IMMERSIVE GLOW HERO SECTION    */}
+        {/* ============================== */}
+        <header className="relative bg-gradient-to-b from-emerald-50/80 to-transparent pt-24 pb-20 lg:pt-32 lg:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-100/50">
+          
+          {/* Edge-to-edge optical blur spheres */}
+          <div className="absolute top-0 right-1/4 -translate-y-12 translate-x-1/2 z-0 pointer-events-none">
+            <div className="w-[600px] h-[600px] bg-emerald-200/40 rounded-full blur-[100px]" />
+          </div>
+          <div className="absolute top-0 left-0 -translate-x-1/4 translate-y-1/4 z-0 pointer-events-none">
+            <div className="w-[400px] h-[400px] bg-sky-100/30 rounded-full blur-[80px]" />
+          </div>
+
+          <div className="max-w-5xl mx-auto text-center relative z-10">
+            <div className="inline-flex items-center justify-center space-x-2 bg-white/60 backdrop-blur-md border border-emerald-100 px-5 py-2 rounded-full text-sm font-semibold text-emerald-800 tracking-wide shadow-sm mb-6">
+              <Users className="w-5 h-5 text-emerald-500" />
+              <span>150+ Influential Leaders</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight text-balance">
+              What The Top <span className="text-emerald-600">1%</span> Are Reading
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-4xl">
-              Discover book recommendations from thought leaders, innovators, and influential figures across various
-              industries. Get insights into what shapes the minds of today's most successful people.
+            
+            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto text-balance font-medium">
+              Discover the specific books that shaped the minds of the world's most successful innovators, CEOs, authors, and thought leaders.
             </p>
           </div>
         </header>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Left Sidebar */}
+        {/* ============================== */}
+        {/* DASHBOARD LAYOUT (Sidebar+Grid)*/}
+        {/* ============================== */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative z-20">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+            
+            {/* FLOATING GLASS SIDEBAR */}
             <aside className="lg:w-80 flex-shrink-0">
-              <div className="bg-white border border-gray-200 rounded-xl p-6 sticky top-8">
+              <div className="bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2rem] p-6 lg:p-8 sticky top-8">
                 <div className="flex items-center mb-6">
-                  <Filter className="h-6 w-6 text-emerald-600 mr-3" />
-                  <h2 className="text-xl font-bold text-gray-900">Filter by Profession</h2>
+                  <Filter className="h-5 w-5 text-emerald-600 mr-2.5" />
+                  <h2 className="text-xl font-bold text-gray-900 tracking-tight">Filter Directory</h2>
                 </div>
 
                 <nav aria-label="Filter people by profession">
-                  <ul className="space-y-1">
+                  <ul className="space-y-1.5 border-t border-gray-100/50 pt-5">
                     {professions.map((profession) => {
                       const isActive = selectedProfession === profession.slug
                       const href = profession.slug ? `/people?profession=${profession.slug}` : "/people"
@@ -279,19 +299,19 @@ export default async function PeoplePage({ searchParams }: Props) {
                         <li key={profession.slug || "all"}>
                           <Link
                             href={href}
-                            className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+                            className={`flex items-center justify-between px-5 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 group ${
                               isActive
-                                ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                                : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/20"
+                                : "text-gray-600 hover:bg-white hover:shadow-sm hover:text-emerald-700"
                             }`}
                             aria-current={isActive ? "page" : undefined}
                           >
                             <span>{profession.name}</span>
                             <span
-                              className={`text-xs px-2.5 py-1 rounded-full font-semibold ${
+                              className={`text-xs px-2.5 py-1 rounded-md font-bold transition-colors ${
                                 isActive
-                                  ? "bg-emerald-200 text-emerald-800"
-                                  : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
+                                  ? "bg-white/20 text-white"
+                                  : "bg-gray-100 text-gray-500 group-hover:bg-emerald-50 group-hover:text-emerald-700"
                               }`}
                             >
                               {profession.count}
@@ -305,41 +325,41 @@ export default async function PeoplePage({ searchParams }: Props) {
               </div>
             </aside>
 
-            {/* Right Content Area */}
-            <section className="flex-1">
-              {/* Results Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+            {/* PEOPLE BENTO GRID */}
+            <section className="flex-1 min-w-0">
+              
+              {/* Grid Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10 pb-6 border-b border-gray-100/80">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    {selectedProfession ? `${currentProfession?.name}s Who Recommend Books` : "All Influential People"}
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">
+                    {selectedProfession ? `${currentProfession?.name} Profiles` : "All Innovators"}
                   </h2>
-                  <p className="text-gray-600">
-                    {filteredPeople.length} {filteredPeople.length === 1 ? "person" : "people"} found
-                    {selectedProfession && ` in ${currentProfession?.name?.toLowerCase()}`}
+                  <p className="text-gray-500 font-medium">
+                    Showing {filteredPeople.length} {filteredPeople.length === 1 ? "profile" : "profiles"} in directory
                   </p>
                 </div>
-                <div className="flex items-center text-gray-500 mt-4 sm:mt-0">
-                  <Users className="h-5 w-5 mr-2" />
+                <div className="flex items-center text-emerald-800 bg-emerald-50 border border-emerald-100 px-4 py-2.5 rounded-xl mt-4 sm:mt-0 font-bold shadow-sm">
+                  <BookOpen className="h-5 w-5 text-emerald-600 mr-2" />
                   <span className="text-sm">
-                    {people.reduce((total, person) => total + person.booksRecommended, 0).toLocaleString()} total
-                    recommendations
+                    {people.reduce((total, person) => total + person.booksRecommended, 0).toLocaleString()} Linked Books
                   </span>
                 </div>
               </div>
 
-              {/* People Grid */}
+              {/* Grid Render */}
               {filteredPeople.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
                   {filteredPeople.map((person) => (
                     <Link
                       key={person.id}
                       href={`/people/${person.slug}`}
-                      className="block group focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-xl"
+                      className="block group focus:outline-none"
                     >
-                      <article className="bg-white border border-gray-200 rounded-xl p-6 h-full transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02] group-hover:-translate-y-1 group-focus:shadow-xl group-focus:scale-[1.02] group-focus:-translate-y-1">
-                        <div className="flex flex-col items-center text-center h-full">
-                          {/* Profile Image */}
-                          <div className="w-24 h-24 rounded-full overflow-hidden mb-4 bg-gray-100 ring-4 ring-gray-50 group-hover:ring-emerald-100 transition-all duration-300">
+                      <article className="bg-white border border-gray-100 rounded-[2rem] p-8 h-full transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1.5 focus:shadow-xl hover:border-emerald-100">
+                        <div className="flex flex-col items-center text-center h-full relative">
+                          
+                          {/* Bento 3D Avatar */}
+                          <div className="w-28 h-28 rounded-full overflow-hidden mb-6 bg-gray-50 ring-[6px] ring-white shadow-xl transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl relative z-10">
                             <img
                               src={person.image || "/placeholder.svg"}
                               alt={`${person.name} profile picture`}
@@ -348,24 +368,26 @@ export default async function PeoplePage({ searchParams }: Props) {
                             />
                           </div>
 
-                          {/* Person Info */}
-                          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                          {/* Data Stack */}
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight group-hover:text-emerald-600 transition-colors">
                             {person.name}
                           </h3>
 
-                          <p className="text-emerald-600 font-semibold mb-3 text-sm uppercase tracking-wide">
-                            {person.professionDisplay}
+                          <div className="mb-4">
+                            <span className="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-[11px] font-bold uppercase tracking-wider group-hover:bg-emerald-50 group-hover:text-emerald-700 transition-colors">
+                              {person.professionDisplay}
+                            </span>
+                          </div>
+
+                          <p className="text-gray-600 leading-relaxed font-medium text-[15px] mb-8 line-clamp-2">
+                            "{person.description}"
                           </p>
 
-                          <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
-                            {person.description}
-                          </p>
-
-                          {/* Books Count */}
-                          <div className="mt-auto flex items-center justify-center bg-gray-50 rounded-lg px-4 py-2 group-hover:bg-emerald-50 transition-colors">
-                            <BookOpen className="h-4 w-4 mr-2 text-gray-500 group-hover:text-emerald-600 transition-colors" />
-                            <span className="text-sm font-semibold text-gray-700 group-hover:text-emerald-700 transition-colors">
-                              {person.booksRecommended} {person.booksRecommended === 1 ? "book" : "books"}
+                          {/* Footer Book Pill */}
+                          <div className="mt-auto flex items-center justify-center bg-gray-50 border border-gray-100/80 rounded-xl px-4 py-2.5 w-full group-hover:bg-emerald-50 group-hover:border-emerald-100 transition-colors">
+                            <BookOpen className="h-4 w-4 mr-2 text-gray-400 group-hover:text-emerald-500 transition-colors" />
+                            <span className="text-sm font-bold text-gray-600 group-hover:text-emerald-700 transition-colors tracking-wide">
+                              {person.booksRecommended} Reviewed Books
                             </span>
                           </div>
                         </div>
@@ -375,18 +397,19 @@ export default async function PeoplePage({ searchParams }: Props) {
                 </div>
               ) : (
                 /* No Results State */
-                <div className="text-center py-16">
-                  <Users className="h-16 w-16 text-gray-300 mx-auto mb-6" />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">No people found</h3>
-                  <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                    We don't have any {selectedProfession}s in our database yet. Check back soon or explore other
-                    professions.
+                <div className="text-center py-20 bg-white rounded-[3rem] border border-dashed border-gray-200">
+                  <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Users className="h-10 w-10 text-gray-300" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 tracking-tight">No Innovators Found</h3>
+                  <p className="text-gray-500 mb-8 max-w-md mx-auto text-lg">
+                    We don't have any {currentProfession?.name || selectedProfession}s in our database yet.
                   </p>
                   <Link
                     href="/people"
-                    className="inline-flex items-center px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-semibold"
+                    className="inline-flex items-center px-8 py-3.5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors font-bold shadow-lg"
                   >
-                    View All People
+                    View All Categories <ArrowRight className="w-5 h-5 ml-2" />
                   </Link>
                 </div>
               )}
@@ -394,30 +417,41 @@ export default async function PeoplePage({ searchParams }: Props) {
           </div>
         </div>
 
-        {/* Call to Action Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-emerald-600">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">Get Inspired by Great Minds</h2>
-            <p className="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">
-              Explore what influential people are reading and discover your next favorite book through their curated
-              recommendations.
+        {/* ============================== */}
+        {/* DEEP-MODE GLOBAL CTA           */}
+        {/* ============================== */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-emerald-900 relative overflow-hidden mt-10">
+          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay"></div>
+          {/* Ambient Glows */}
+          <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-emerald-500 rounded-full blur-[100px] opacity-20 pointer-events-none" />
+          <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-teal-400 rounded-full blur-[100px] opacity-20 pointer-events-none" />
+          
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 tracking-tight text-balance">
+              Who Should We Add Next?
+            </h2>
+            <p className="text-emerald-100/90 text-lg sm:text-xl mb-12 max-w-2xl mx-auto leading-relaxed text-balance">
+              We are constantly decoding the reading lists of the world's most fascinating minds. Join our newsletter to get their book recommendations instantly.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/categories"
-                className="inline-flex items-center px-8 py-3 bg-white text-emerald-600 rounded-lg hover:bg-gray-50 transition-colors font-semibold"
-              >
-                Browse Book Categories
-              </Link>
-              <Link
-                href="/books"
-                className="inline-flex items-center px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-emerald-600 transition-colors font-semibold"
-              >
-                View All Books
-              </Link>
+            
+            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto bg-white/10 p-2 rounded-2xl backdrop-blur-md border border-white/20 shadow-2xl">
+              <input
+                type="email"
+                placeholder="Enter your email address..."
+                className="flex-1 px-6 py-4 rounded-xl bg-white/90 text-gray-900 border-0 focus:ring-2 focus:ring-emerald-400 placeholder-gray-500 font-medium outline-none"
+                aria-label="Email address for newsletter subscription"
+              />
+              <button className="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-400 transition-colors shadow-lg flex-shrink-0">
+                Subscribe
+              </button>
             </div>
+            
+            <p className="text-emerald-200/60 text-sm mt-8 font-bold tracking-widest uppercase">
+              Free Weekly Insights
+            </p>
           </div>
         </section>
+
       </main>
     </>
   )

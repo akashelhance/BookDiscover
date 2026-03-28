@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { Search, BookOpen, Menu, X } from "lucide-react"
 import ActiveLink from "./active-link"
+import { siteConfig } from "../../config/site"
 
 export default function Header() {
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
@@ -14,7 +15,7 @@ export default function Header() {
                 <BookOpen className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                BookDiscover
+                {siteConfig.name}
               </span>
             </Link>
           </div>

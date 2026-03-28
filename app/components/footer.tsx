@@ -1,117 +1,81 @@
 import Link from "next/link"
-import { BookOpen, Mail, Phone, MapPin } from "lucide-react"
+import { BookOpen, Mail, Phone, MapPin, Twitter, Facebook, Instagram, ArrowRight, Github, Linkedin, Youtube } from "lucide-react"
+import { siteConfig } from "../../config/site"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Brand Section */}
+    <footer className="bg-white text-gray-600 border-t border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+          {/* Brand & Newsletter Section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="flex items-center justify-center w-8 h-8 bg-emerald-600 rounded-lg">
+            <Link href="/" className="inline-flex items-center space-x-2 mb-6 group">
+              <div className="flex items-center justify-center w-8 h-8 bg-emerald-600 rounded-lg group-hover:bg-emerald-700 transition-colors">
                 <BookOpen className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-white">BookDiscover</span>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Discover your next great read through curated recommendations from influential people and expert
-              reviewers.
+              <span className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">{siteConfig.name}</span>
+            </Link>
+            <p className="text-gray-500 leading-relaxed mb-8 max-w-sm">
+              {siteConfig.description}
             </p>
 
             {/* Newsletter Subscription */}
-            <div className="mb-6">
-              <h3 className="text-white font-semibold mb-3">Subscribe to our newsletter</h3>
-              <p className="text-gray-400 text-sm mb-4">
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8">
+              <h3 className="text-gray-900 font-bold mb-2">Subscribe to our newsletter</h3>
+              <p className="text-gray-500 text-sm mb-4">
                 Get weekly book recommendations and updates delivered to your inbox.
               </p>
               <form className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1">
+                <div className="flex-1 relative">
                   <label htmlFor="newsletter-email" className="sr-only">
                     Email address
                   </label>
+                  <Mail className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input
                     type="email"
                     id="newsletter-email"
                     name="email"
                     placeholder="Enter your email"
-                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                    className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all shadow-sm"
                     required
                     aria-describedby="newsletter-description"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors font-medium whitespace-nowrap"
+                  className="px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-all font-semibold flex items-center justify-center whitespace-nowrap group"
                 >
                   Subscribe
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
-              <p id="newsletter-description" className="text-xs text-gray-500 mt-2">
+              <p id="newsletter-description" className="text-xs text-gray-400 mt-3 text-center sm:text-left">
                 We respect your privacy. Unsubscribe at any time.
               </p>
-            </div>
-
-            <div className="flex space-x-4">
-              <a
-                href="https://twitter.com/bookdiscover"
-                className="text-gray-400 hover:text-emerald-400 transition-colors"
-                aria-label="Follow us on Twitter"
-              >
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                </svg>
-              </a>
-              <a
-                href="https://facebook.com/bookdiscover"
-                className="text-gray-400 hover:text-emerald-400 transition-colors"
-                aria-label="Follow us on Facebook"
-              >
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    fillRule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://instagram.com/bookdiscover"
-                className="text-gray-400 hover:text-emerald-400 transition-colors"
-                aria-label="Follow us on Instagram"
-              >
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    fillRule="evenodd"
-                    d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.004 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323c-.875.807-2.026 1.297-3.323 1.297z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+          <div className="lg:ml-auto">
+            <h3 className="text-gray-900 font-bold mb-6">Quick Links</h3>
+            <ul className="space-y-4">
               <li>
-                <Link href="/categories" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/categories" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   Browse Categories
                 </Link>
               </li>
               <li>
-                <Link href="/people" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/people" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   Influential People
                 </Link>
               </li>
               <li>
-                <Link href="/authors" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/authors" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   Featured Authors
                 </Link>
               </li>
               <li>
-                <Link href="/books" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/books" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   All Books
                 </Link>
               </li>
@@ -120,25 +84,25 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Support</h3>
-            <ul className="space-y-2">
+            <h3 className="text-gray-900 font-bold mb-6">Support</h3>
+            <ul className="space-y-4">
               <li>
-                <Link href="/help" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/help" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/contact" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/faq" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/feedback" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link href="/feedback" className="text-gray-500 hover:text-emerald-600 hover:translate-x-1 transition-all inline-block font-medium">
                   Send Feedback
                 </Link>
               </li>
@@ -147,46 +111,78 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact</h3>
-            <ul className="space-y-3">
-              <li className="flex items-center text-gray-400 text-sm">
-                <Mail className="h-4 w-4 mr-2 flex-shrink-0" />
-                <a href="mailto:hello@bookdiscover.com" className="hover:text-emerald-400 transition-colors">
-                  hello@bookdiscover.com
+            <h3 className="text-gray-900 font-bold mb-6">Contact</h3>
+            <ul className="space-y-4">
+              <li>
+                <a href={`mailto:${siteConfig.contact.email}`} className="group flex items-center text-gray-500 hover:text-emerald-600 transition-colors font-medium">
+                  <div className="w-8 h-8 rounded-full bg-gray-50 group-hover:bg-emerald-50 flex items-center justify-center mr-3 transition-colors">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  {siteConfig.contact.email}
                 </a>
               </li>
-              <li className="flex items-center text-gray-400 text-sm">
-                <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
-                <a href="tel:+1234567890" className="hover:text-emerald-400 transition-colors">
-                  +1 (234) 567-890
+              <li>
+                <a href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, '')}`} className="group flex items-center text-gray-500 hover:text-emerald-600 transition-colors font-medium">
+                  <div className="w-8 h-8 rounded-full bg-gray-50 group-hover:bg-emerald-50 flex items-center justify-center mr-3 transition-colors">
+                    <Phone className="h-4 w-4" />
+                  </div>
+                  {siteConfig.contact.phone}
                 </a>
               </li>
-              <li className="flex items-start text-gray-400 text-sm">
-                <MapPin className="h-4 w-4 mr-2 flex-shrink-0 mt-0.5" />
-                <span>123 Book Street, Reading City, RC 12345</span>
+              <li className="flex items-start text-gray-500 font-medium">
+                <div className="w-8 h-8 rounded-full bg-gray-50 flex-shrink-0 flex items-center justify-center mr-3 mt-0.5">
+                  <MapPin className="h-4 w-4" />
+                </div>
+                <span>123 Book Street<br/>Reading City, RC 12345</span>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex flex-wrap justify-center md:justify-start space-x-6 mb-4 md:mb-0">
-              <Link href="/privacy" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+        <div className="border-t border-gray-100 mt-16 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-gray-400 text-sm text-center md:text-left font-medium">© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+            
+            <div className="flex items-center space-x-6">
+              {siteConfig.social.twitter && (
+                <a href={siteConfig.social.twitter} className="text-gray-400 hover:text-emerald-600 transition-colors" aria-label="Twitter">
+                  <Twitter className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.facebook && (
+                <a href={siteConfig.social.facebook} className="text-gray-400 hover:text-emerald-600 transition-colors" aria-label="Facebook">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.instagram && (
+                <a href={siteConfig.social.instagram} className="text-gray-400 hover:text-emerald-600 transition-colors" aria-label="Instagram">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.github && (
+                <a href={siteConfig.social.github} className="text-gray-400 hover:text-emerald-600 transition-colors" aria-label="GitHub">
+                  <Github className="w-5 h-5" />
+                </a>
+              )}
+              {siteConfig.social.linkedin && (
+                <a href={siteConfig.social.linkedin} className="text-gray-400 hover:text-emerald-600 transition-colors" aria-label="LinkedIn">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              )}
+            </div>
+
+            <div className="flex flex-wrap justify-center space-x-6">
+              <Link href="/privacy" className="text-gray-400 hover:text-emerald-600 transition-colors text-sm font-medium">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+              <Link href="/terms" className="text-gray-400 hover:text-emerald-600 transition-colors text-sm font-medium">
                 Terms of Service
               </Link>
-              <Link href="/contact" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
-                Contact
-              </Link>
-              <Link href="/sitemap" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+              <Link href="/sitemap" className="text-gray-400 hover:text-emerald-600 transition-colors text-sm font-medium">
                 Sitemap
               </Link>
             </div>
-            <p className="text-gray-400 text-sm text-center md:text-right">© 2024 BookDiscover. All rights reserved.</p>
           </div>
         </div>
       </div>
